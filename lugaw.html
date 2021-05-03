@@ -1,0 +1,234 @@
+<html>
+	<title>Order Lugaw!</title>
+	<link rel = "icon" href = "http://gototendon.com/wp-content/uploads/2018/06/goto-icon.png" type = "image/x-icon">
+	<head>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Knewave&family=Lilita+One&display=swap" rel="stylesheet">
+
+		<style>
+			body {
+				background: rgb(5,98,242);
+				background: radial-gradient(circle, rgba(5,98,242,1) 0%, rgba(1,88,224,0.9556197478991597) 56%, rgba(54,131,252,1) 95%);
+				font-family: TimesNewRoman;
+			}
+
+			.container {
+				position: relative;
+				text-align: center;
+				color: white;
+			}
+
+			.headimg {
+				width: 70%;
+			}
+
+			.headtitle {
+				font-size: 5vw;
+				font-family: 'Lilita One', cursive;
+			}
+
+			.tagline {
+				font-size: 1.5vw;
+			}
+
+			.mainFieldset {
+				opacity: .9;
+				width: 40%;
+				box-shadow: .5vw .5vw .25vw #192841;
+			}
+
+			.formlabel {
+				font-size: 2vw;
+				text-align: center;
+				border: 0.3vw;
+				opacity: .9;
+				padding: 1vw;
+			}
+
+			.fieldinfo {
+				font-size: 1.8vw;
+				text-align: center;
+			}
+
+			.column {
+				float: left;
+				width: 50%;
+				font-size: 1.3vw;
+			}
+
+			.row: after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+
+			.menu {
+				text-align: left;
+				margin-left: 3vw;
+			}
+
+			.txtbx {
+				height: 2vw;
+				width: 15vw;
+			}
+
+			.deladd {
+				font-size: 1.5vw;
+			}
+
+			.addfield {
+				height: 8.5vw;
+				width: 30vw;
+				margin-left: 4vw;
+				margin-right: 4vw;
+				margin-bottom: 1vw;
+			}
+
+			.button {
+				background-color: #4CAF50;
+				border: none;
+				color: white;
+				padding-left: 1.5vw;
+				padding-right: 1.5vw;
+				padding-top: 1vw;
+				padding-bottom: 1vw;
+				text-align: center;
+				font-size: 1.2vw;
+				margin-left: 0.8vw;
+				margin-right: 0.8vw;
+				margin-bottom: 1vw;
+				cursor: pointer;
+			}
+
+			.button2 {
+				background-color: #e7e7e7;
+				color: black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<img class ="headimg" src="https://casaveneracion.com/wp-content/uploads/asia/2013/02/lugaw-tokwat-baboy1.jpg" alt="Lugaw Essentials!">
+			<div class="headtitle">
+				<b>Lugaw Essentials!</b>
+			</div>
+			<p class="tagline"><i>"Because Lugaw is Essential!"</i></p>
+			<div class="orderForm">
+				<form method="post" autocomplete="on" onsubmit=" return submitButton()">
+					<center>
+						<fieldset class="mainFieldset">
+							<legend class="formlabel">Order Form</legend>
+							<fieldset>
+								<legend class="fieldinfo">Order Info</legend>
+								<div class="row">
+									<div class="column">
+										<div class="menu">
+											<h3>Serving Size:</h3>
+											<label><input id="c_size1" type="radio" name="size" value="Small Bowl" required> Small Bowl </label><br>
+											<label><input id="c_size2"  type="radio" name="size" value="Medium Bowl"> Medium Bowl </label><br>
+											<label><input id="c_size3" type="radio" name="size" value="Large Bowl"> Large Bowl </label><br><br>
+										</div>
+									</div>
+									<div class="column">
+										<div class="menu">
+											<h3>Add-Ons:</h3>
+											<label><input id="c_add1" type="checkbox" name="add" value="Spring Onions"> Spring Onion </label><br>
+											<label><input id="c_add2" type="checkbox" name="add" value="Boiled Egg"> Boiled Egg </label><br>
+											<label><input id="c_add3" type="checkbox" name="add" value="Chicken"> Chicken </label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend class="fieldinfo">Contact Info</legend><br>
+								<label> Customer Name: <input id="c_name" class="txtbx" type="text" name="customer_name" required></label><br/><br/>
+								<label> Mobile Number: <input id="c_number" class="txtbx" type="number" name="number" placeholder="09XXXXXXXXX" onchange="mobnum()" required></label><br/><br/>
+								<label class="deladd"><b>Delivery Address:</b><br>
+									<textarea id="c_address" class="addfield" required></textarea>
+								</label>
+							</fieldset>
+							<br>
+							<input class="button" type="submit" value="Place Order">
+							<input class="button button2" type="reset" value="Clear Field">
+						</fieldset>
+					</center>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	function mobnum() { //check if input number has the correct format
+		var receipt_num = document.getElementById("c_number").value;
+		if ((receipt_num[0] != 0) || (receipt_num[1] != 9) || (receipt_num.length != 11)){
+			alert("Phone Number should start with \"09\" and must be 11 characters!");
+		}
+	}
+
+	function submitButton() {
+		var top1 = document.getElementById("c_add1").value;
+		var top2 = document.getElementById("c_add2").value;
+		var top3 = document.getElementById("c_add3").value;
+		var c_name = document.getElementById("c_name").value;
+		var c_number = document.getElementById("c_number").value;
+		var c_address = document.getElementById("c_address").value;
+		var orderSize = "";
+		var addon = "";
+		var addonfinal = "";
+		var message = "";
+
+		if (document.getElementById("c_size1").checked){
+			orderSize = document.getElementById("c_size1").value;
+		}
+
+		else if (document.getElementById("c_size2").checked){
+			orderSize = document.getElementById("c_size2").value;
+		}
+
+		else if (document.getElementById("c_size3").checked){
+			orderSize = document.getElementById("c_size3").value;
+		}
+
+		orderSize = "    Order Size: " + orderSize + "\n";
+
+		//add-ons
+		if (document.getElementById("c_add1").checked){
+			addon += top1;
+		}
+		if (document.getElementById("c_add2").checked){
+			if (addon != ""){
+				addon += ", " + top2;
+			}
+			else{
+				addon += top2;
+			}
+		}
+		if (document.getElementById("c_add3").checked){
+			if (addon != ""){
+				addon += ", " + top3;
+			}
+			else{
+				addon += top3;
+			}
+		}
+
+		if (addon != ""){
+			addonfinal = "    Add-On(s): " + addon + "\n";
+		}
+		else{
+			addonfinal: "    None";
+		}
+
+		message = "Click \"OK\" to Confirm Order!\n\n" + orderSize + addonfinal + "    Contact Info:\n" + "      ~ Name: " + c_name + "\n" + "      ~ Contact No.: " + c_number + "\n" + "      ~ Address:\n" + "             " + c_address + "\n";
+
+		let prompt = confirm(message);
+		if (prompt){
+			alert("     Thank You for your Order!\n" + "     #LugawIsEssential");
+		}
+		else{
+			return false;
+		}
+	}
+</script>
